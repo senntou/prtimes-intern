@@ -2,6 +2,8 @@ name: private-isu
 services:
   nginx:
     image: nginx:1.26
+    depends_on:
+      - app
     volumes:
       - ./etc/nginx/conf.d:/etc/nginx/conf.d
       - ./public:/public
@@ -13,7 +15,7 @@ services:
   app:
     build:
       # Go実装の場合は golang/ PHP実装の場合は php/
-      context: ruby/
+      context: php/
       dockerfile: Dockerfile
     depends_on:
       - mysql
